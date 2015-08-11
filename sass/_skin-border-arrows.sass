@@ -1,0 +1,141 @@
+@if $border-arrows-grouping
+    $border-arrow-width: 44px
+    $border-arrow-height: 44px
+    $progress-style-vertical-keyline: false
+    $progress-bar-arrow-color: #FFF
+
+    @if $progress-bar-animation == true
+        @-webkit-keyframes preceder
+            0%
+                -webkit-transform: translate3d(-150%, 0, 0)
+                transform: translate3d(-150%, 0, 0)
+                visibility: visible
+            100%
+                -webkit-transform: translate3d(0, 0, 0)
+                transform: translate3d(0, 0, 0)
+
+        @keyframes preceder
+            0%
+                -webkit-transform: translate3d(-150%, 0, 0)
+                transform: translate3d(-150%, 0, 0)
+                visibility: visible
+            100%
+                -webkit-transform: translate3d(0, 0, 0)
+                transform: translate3d(0, 0, 0)
+
+        .preceder, .current
+            -webkit-animation-name: preceder
+            animation-name: preceder
+            -webkit-animation-duration: 1s
+            animation-duration: 1s
+            -webkit-animation-fill-mode: both
+            animation-fill-mode: both
+
+    .checkout-progress-bar-step
+        border: none
+        text-align: center
+        padding: 0
+        height: $border-arrow-width
+        @if $progress-style-vertical-keyline == true
+            +progress-vertical-keyline 
+        @if $progress-text-transform == uppercase and $progress-bar-font-size >= 15px
+            line-height: $border-arrow-width / ($progress-bar-font-size * .88) // 12% reduction
+            +respond-to(medium)
+                line-height: $border-arrow-width / ($progress-bar-font-size * .76) // 24% reduction
+            +respond-to(small)
+                line-height: $border-arrow-width / ($progress-bar-font-size * .64) // 36% reduction
+        @else
+            line-height: $border-arrow-width / $progress-bar-font-size       
+        &:before, &:after
+            content: ""
+            width: 0
+            height: 0
+            border-style: solid
+            position: absolute
+            top: -($border-arrow-width / 2)
+            border-width: $border-arrow-height 0 $border-arrow-height $border-arrow-width
+            z-index: 1
+        &:before
+            border-color: transparent transparent transparent $progress-bar-arrow-color
+            right: -($border-arrow-width)
+        &:after
+            border-color: transparent transparent transparent $progress-bar-future-background
+            right: -($border-arrow-width - 10px)
+            transition: border-color .2s ease
+        &.current
+            &:after
+                border-color: transparent transparent transparent $progress-bar-active-background
+        &.preceder
+            &:after
+                border-color: transparent transparent transparent $progress-bar-preceder-background
+            @if $progress-bar-preceder-background-hover != $progress-bar-preceder-background
+                &:hover
+                    &:after
+                        border-color: transparent transparent transparent $progress-bar-preceder-background-hover 
+        &.step-shipping
+            width: 17%
+            z-index: 4
+            // Since we're pulling the pseudo elements to the right so much,
+            // the first column appears larger than it should be. The first
+            // column was reduced by 7% (Was 20%, now 13%). This is
+            // compensated for in the column width calculation above. An
+            // additional compensation has been made on the first column's
+            // pseudo elements to pull everything right. This worked out to be
+            // -12px. The additional -16px is the standard adjustment for
+            // first pseudo-class.
+            &:after
+                right: -($border-arrow-width/2) / 2
+            &:before
+                right: -($border-arrow-width/2)
+            @if $progress-style == border-arrows-icons
+                padding: 0 4%
+        &.step-deliveryoptions
+            z-index: 3
+            @if $progress-style == border-arrows-icons
+                padding: 0 7%
+            @else
+                width: 20%
+        &.step-billing
+            z-index: 2
+            @if $progress-style == border-arrows-icons
+                padding: 0 10%
+            @else
+                width: 18%
+        &.step-payment
+            z-index: 1
+            @if $progress-style == border-arrows-icons
+                padding: 0 8.8%
+            @else
+                width: 19%
+
+        &.step-confirmation
+            width: 25%
+            .ie8 &
+                z-index: 0
+        .step-label
+            position: relative
+            z-index: 3
+            margin-left: 44px
+        &:first-child .step-label
+            margin-left: 0
+            @if $progress-style == border-arrows-icons
+                &:after
+                    margin-right: 5px
+                    top: -5px
+                    left: -32px
+                    position: absolute
+                    @extend .fa
+                    +font-size(24px)
+            @if $progress-style == border-arrows-ordinal
+                @if $progress-style-icon-position == left
+                    &:after
+                        margin-right: 5px
+                        +font-size(16px)
+                        @extend %pseudo-list-ordinal
+                @else if $progress-style-icon-position == right
+                    &:before
+                        margin-left: 7px
+                        +font-size(16px)
+                        @extend %pseudo-list-ordinal
+        @if $progress-style == border-arrows-icons
+            @extend %icons-fontawesome

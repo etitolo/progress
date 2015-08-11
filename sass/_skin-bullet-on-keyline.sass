@@ -1,0 +1,57 @@
+@if $progress-style == bullet-on-keyline
+    $progress-style-vertical-keyline:   false
+    $progress-keyline:                  $_black
+    $progress-bar-active:               $_black
+    $progress-bar-active-background:    $primaryBackgroundColor
+    // $progress-bar-future:               $_greyscale90
+    $progress-bar-future-background:    $progress-bar-active-background
+    // $progress-bar-preceder:             $progress-bar-future
+    $progress-bar-preceder-background:  $progress-bar-active-background
+    $progress-text-shadow:              false
+
+    .checkout-progress-bar
+        box-shadow: none
+        padding: 0 10% 0 6%
+        overflow: inherit
+    .checkout-progress-bar-step
+        width: 100% / $number-of-steps
+        background-color: transparent
+        @include respond-to(small)
+            +font-size($progress-bar-font-size - 4)
+        border-top: 1px solid $progress-keyline
+        color: $progress-bar-future
+        margin-bottom: 30px
+        @if $progress-text-shadow == false
+            text-shadow: none
+        @if $progress-style-vertical-keyline == true
+            +progress-vertical-keyline
+        &.step-shipping
+            text-align: left
+        &.step-conf
+            text-align: right
+        &.current
+            color: $progress-bar-active
+            background-color: transparent
+            font-weight: 700
+            @if $progress-text-shadow == false
+                text-shadow: none
+            &.step-shipping:before
+                left: 0
+            &.step-conf:before
+                right: 0
+            &:before
+                @extend .fa
+                content: "\f111"
+                +font-size($progress-bar-font-size)
+                color: $progress-keyline
+                position: absolute
+                top: -9px
+                left: 48%
+        &.preceder
+            background-color: $progress-bar-preceder-background
+            a
+                color: $progress-bar-preceder
+
+            
+
+

@@ -1,0 +1,33 @@
+@if $progress-style == simple-ordinal
+    $progress-style-vertical-keyline: true
+    .checkout-progress-bar
+        counter-reset: ordinal-counter
+    .checkout-progress-bar-step
+        padding: 7px 0
+        @if $progress-style-vertical-keyline == true
+            +progress-vertical-keyline
+        @if $progress-style-icon-position == top or $progress-style-icon-position == bottom
+            .step-label
+                display: block
+        @if $progress-style-icon-position == top or $progress-style-icon-position == left
+            &:before
+                @extend %pseudo-list-ordinal
+        @if $progress-style-icon-position == bottom or $progress-style-icon-position == right
+            &:after
+                @extend %pseudo-list-ordinal
+        @if $progress-style-icon-position == top
+            padding: 7px 0
+            &:before
+                top: -3px
+                position: relative
+        @else if $progress-style-icon-position == bottom
+            padding: 7px 0
+            &:after
+                top: 3px
+                position: relative
+        @else if $progress-style-icon-position == right
+            &:after
+                margin-left: 0
+        @else
+            &:before
+                margin-right: 5px

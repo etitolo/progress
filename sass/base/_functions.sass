@@ -1,0 +1,26 @@
+// Mixins
+@mixin reset-list-style
+    list-style: none
+
+@mixin progress-vertical-keyline
+    border-left: $progress-vertical-keyline-left
+    &:first-child
+        border-left: none
+    border-right: $progress-vertical-keyline-right
+    &:last-child
+        border-right: none
+
+@mixin icon($progress-icon: "\f11a", $rotate: null, $icon-padding: null)
+    &:#{$pseudoElementPosition}
+        content: "#{$progress-icon}"
+        @if $rotate != null
+            @extend .#{$rotate} !optional
+        @if $icon-padding != null
+            padding: $icon-padding
+            
+@mixin step-or-step-child($progress-icon: "\f11a", $rotate: null, $icon-padding: null)
+    @if $progress-style == border-arrows or $progress-style == border-arrows-icons
+        .step-label
+            @include icon($progress-icon, $rotate, $icon-padding)
+    @else
+        @include icon($progress-icon, $rotate, $icon-padding)

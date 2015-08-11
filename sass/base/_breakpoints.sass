@@ -1,0 +1,36 @@
+// respond-to mixin Usage:
+// @include respond-to(small) 
+//     ...
+// @include respond-to(medium)
+//     ...
+// @include respond-to(large)
+//     ...
+
+// @mixin respond-to($breakpoint)
+//     @if $breakpoint == "small"
+//         @media (max-width: 769px)
+//             @content
+//     @else if $breakpoint == "medium"
+//         @media (max-width: 1024px)
+//             @content
+//     @else if $breakpoint == "large"
+//         @media (max-width: 1200px)
+//             @content
+
+// TODO: Below is how we want to roll when we get Sass 3.4.12. The
+//       map will allow us to push the breakpoint configurations out
+//       to the brands. Just delete what's above and uncomment below.
+
+$breakpoints: ('small': 767px, 'medium': 992px, 'large': 1200px)
+
+@mixin respond-to($breakpoint)
+    // Retrieves the value from the key
+    $value: map-get($breakpoints, $breakpoint)
+ 
+    // If the key exists in the map
+    @if $value != null
+        // Prints a media query based on the value
+        @media (max-width: $value)
+            @content
+    @else
+        @warn "Unfortunately, no value could be retrieved from '$break'. " + "Please make sure it is defined in '$breakpoints' map."

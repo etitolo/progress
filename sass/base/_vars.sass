@@ -1,0 +1,77 @@
+// $progress-style - Configurable themes for the progress bar.
+// Choose from the following themes:
+//
+// $progress-style: default !default
+// $progress-style: circle-icon-ordinal !default
+$progress-style: circle-icon-fontawesome !default
+// $progress-style: simple-ordinal !default
+// $progress-style: simple-icon-fontawesome !default
+// $progress-style: border-arrows !default
+// $progress-style: border-arrows-ordinal !default
+// $progress-style: border-arrows-icons !default
+// $progress-style: bullet-on-keyline !default
+
+// Options: Top, Right, Bottom, Left
+$progress-style-icon-position:              top !default
+
+$number-of-steps:                           5 !default
+
+$border-arrows-grouping: ($progress-style == border-arrows) or ($progress-style == border-arrows-icons) or ($progress-style == border-arrows-ordinal) !default
+
+$progress-high-contrast:                    rgba(255,255,255,.9)
+$progress-mid-contrast:                     rgba(255,255,255,.6)
+$progress-low-contrast:                     rgba(0,0,0,.9)
+$progress-style-vertical-keyline:           true !default
+$progress-bar-font-size:                    16px !default
+$progressBarFontStack:                      "Helvetica Neue", Helvetica, Arial, sans-serif !default
+$progress-text-transform:                   uppercase !default
+
+$progress-bar-active:                       #FFF !default
+$progress-bar-active-background:            #106E7E !default
+
+$progress-bar-future:                       $progress-low-contrast !default
+$progress-bar-future-background:            #CCC !default
+
+$progress-bar-preceder:                     $progress-bar-future !default
+$progress-bar-preceder-hover-underline:     true !default
+$progress-bar-preceder-background:          $progress-bar-future-background !default
+$progress-bar-preceder-background-hover:    $progress-bar-future-background !default
+
+$progress-bar-animation:                    true !default
+$progress-icon-size:                        24px !default
+$progress-ordinal-size:                     16px !default
+$progress-vertical-keyline-left:            1px solid #CCC !default
+$progress-vertical-keyline-right:           1px solid #e5e5e5 !default
+$progress-text-shadow:                      true !default
+$progress-drop-shadow:                      true !default
+$progressBarMargin:                         20px 0 !default
+
+// This gets redefined to :after conditionally below.
+$pseudoElementPosition: before !default
+
+// progress-bar icons (FontAwesome)
+$icon-shipping:     "\f0d1" !default
+$icon-delivery:     "\f06b" !default
+$icon-billing:      "\f003" !default
+$icon-payment:      "\f09d" !default
+$icon-confirmation: "\f00c" !default
+
+
+// From Common Vars
+$_white:                        #FFF !default
+$_greyscale05:                  darken(#FFF, 5) !default
+$_greyscale10:                  darken(#FFF, 10) !default
+$_greyscale20:                  darken(#FFF, 20) !default
+$_greyscale30:                  darken(#FFF, 30) !default
+$_greyscale40:                  darken(#FFF, 40) !default
+$_greyscale50:                  darken(#FFF, 50) !default
+$_greyscale60:                  darken(#FFF, 60) !default
+$_greyscale70:                  darken(#FFF, 70) !default
+$_greyscale80:                  darken(#FFF, 80) !default
+$_greyscale90:                  darken(#FFF, 90) !default
+$_greyscale95:                  darken(#FFF, 95) !default
+$_black:                        #000 !default
+
+
+$text-shadow-light:             $_white !default
+$text-shadow-dark:              $_black !default

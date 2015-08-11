@@ -1,0 +1,124 @@
+*, *:before, *:after
+    padding: 0
+    margin: 0
+    box-sizing: inherit
+
+html
+    box-sizing: border-box
+
+// Placeholder Selectors that get used in multiple skins
+%pseudo-list-ordinal
+    @if ($progress-style == simple-ordinal or $progress-style == border-arrows-ordinal) and ($progress-style-icon-position == right or $progress-style-icon-position == left)
+        content: counter(ordinal-counter, decimal) "."
+    @else
+        content: counter(ordinal-counter, decimal)
+    counter-increment: ordinal-counter
+    +font-size($progress-ordinal-size)
+
+%circle-icon-border
+    border: 1px solid $progress-bar-future-background/2
+    text-align: center
+    display: inline-block
+    color: $progress-bar-future-background/2
+    background-color: rgba(255,255,255,.65)
+
+%circle-icon-fontawesome
+    border-radius: $progress-icon-size
+    padding: $progress-icon-size - 14px
+    +font-size($progress-icon-size)
+    height: $progress-icon-size * 2
+    width: $progress-icon-size * 2
+    position: relative
+
+%icons-fontawesome
+    @if $progress-style-icon-position == right or $progress-style-icon-position == bottom
+        $pseudoElementPosition: after
+    &.step-shipping
+        @include step-or-step-child($icon-shipping, fa-flip-horizontal)
+    &.step-deliveryoptions
+        @include step-or-step-child($icon-delivery)
+    &.step-billing
+        @include step-or-step-child($icon-billing)
+    &.step-payment
+        @include step-or-step-child($icon-payment)
+    &.step-conf
+        @include step-or-step-child($icon-confirmation)
+
+%simple-icon-fontawesome
+    position: relative
+    top: 2px
+
+.checkout-progress-bar
+    +reset-list-style()
+    counter-reset: ordinal-counter
+    margin: $progressBarMargin
+    overflow: hidden
+    font-family: $progressBarFontStack
+    text-transform: $progress-text-transform
+    background-color: $progress-bar-future-background
+    @if $progress-drop-shadow == true
+        box-shadow: 0 1px 6px rgba(0,0,0,.5)
+    // Font Adjustments for Tablet
+    @if $progress-text-transform == uppercase
+        letter-spacing: .05rem
+        @if $progress-bar-font-size >= 15px
+            +font-size($progress-bar-font-size * .88) // 12% reduction
+            +respond-to(medium)
+                +font-size($progress-bar-font-size * .76) // 24% reduction
+            +respond-to(small)
+                +font-size($progress-bar-font-size * .64) // 36% reduction
+    @else
+        +font-size($progress-bar-font-size)
+        +respond-to(small)
+            +font-size($progress-bar-font-size * .76) // 24% reduction
+
+.checkout-progress-bar-step
+    float: left
+    width: 100% / $number-of-steps
+    color: $progress-bar-future
+    text-align: center
+    padding: 10px 0
+    position: relative
+    white-space: nowrap
+    @if $progress-text-shadow == true
+        text-shadow: 0 .05em 1px $text-shadow-light
+    @if $progress-style == default and $progress-style-vertical-keyline == true
+        +progress-vertical-keyline
+    a
+        color: $progress-bar-preceder
+    .step-label
+        line-height: ($progress-bar-font-size * 1.4) / $progress-bar-font-size
+        text-decoration: none
+        display: inline-block
+        transition: all .2s ease
+        @if $progress-bar-preceder-hover-underline == true
+            border-bottom: 1px solid transparent
+    &.current
+        color: $progress-bar-active
+        background-color: $progress-bar-active-background
+        @if $progress-text-shadow == true
+            text-shadow: 0 .05em 1px $text-shadow-dark
+    &.preceder
+        background: $progress-bar-preceder-background
+        color: $progress-bar-preceder
+        transition: background .2s ease, border-color .2s ease
+        @if $progress-bar-preceder-background-hover != $progress-bar-future-background
+            &:hover
+                background: $progress-bar-preceder-background-hover
+        @if $progress-bar-preceder-hover-underline == true
+            .step-label
+                &:hover
+                    border-color: $progress-bar-preceder
+                    color: darken($progress-bar-preceder, 30)
+
+
+
+// Gets used in multiple skins
+@if $progress-style == simple-icon-fontawesome and $progress-style == simple-ordinal
+    .checkout-progress-bar-step
+        &.current
+            background-color: $progress-bar-active-background
+            &:before, &:after
+                background-color: transparent
+                color: $progress-bar-active
+                border: none

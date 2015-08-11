@@ -1,0 +1,42 @@
+@if $progress-style == circle-icon-ordinal
+    .checkout-progress-bar-step
+        padding: 7px 0 7px
+        &:before, &:after
+            border-radius: $progress-ordinal-size
+            padding: $progress-ordinal-size - 10px
+            height: $progress-ordinal-size * 2
+            width: $progress-ordinal-size * 2
+        &.current
+            &:before, &:after
+                border: 1px solid $progress-high-contrast
+                background-color: $progress-bar-active-background
+                color: $progress-high-contrast
+        @if $progress-style-vertical-keyline == true
+            +progress-vertical-keyline
+        @if $progress-style-icon-position == top or $progress-style-icon-position == bottom
+            &:before, &:after
+                position: relative
+            .step-label
+                display: block
+        @if $progress-style-icon-position == top or $progress-style-icon-position == left
+            &:before
+                @extend %circle-icon-border
+                @extend %pseudo-list-ordinal
+        @if $progress-style-icon-position == bottom or $progress-style-icon-position == right
+            &:after
+                @extend %circle-icon-border
+                @extend %pseudo-list-ordinal
+        @if $progress-style-icon-position == top
+            padding: 14px 0 7px
+            &:before
+                top: -5px
+        @else if $progress-style-icon-position == bottom
+            padding: 7px 0 14px
+            &:after
+                top: 5px
+        @else if $progress-style-icon-position == right
+            &:after
+                margin-left: 5px
+        @else
+            &:before
+                margin-right: 5px

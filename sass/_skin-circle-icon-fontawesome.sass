@@ -1,0 +1,46 @@
+@if $progress-style == circle-icon-fontawesome
+    $progress-style-vertical-keyline: true
+
+    .checkout-progress-bar-step
+        @if $progress-style-vertical-keyline == true
+            +progress-vertical-keyline
+        &:before, &:after
+            @extend .fa
+            +font-size($progress-icon-size)
+        &.current
+            &:before, &:after
+                border: 2px solid $progress-bar-active
+                background-color: $progress-bar-active-background
+                color: $progress-bar-active
+                text-shadow: none
+        &.step-shipping
+            &:before, &:after
+                padding-left: 4px
+        @if $progress-style-icon-position == top or $progress-style-icon-position == bottom
+            display: flex
+            flex-direction: column
+            align-items: center
+        @if $progress-style-icon-position == top or $progress-style-icon-position == left
+            &:before
+                @extend %circle-icon-border
+                @extend %circle-icon-fontawesome
+        @if $progress-style-icon-position == bottom or $progress-style-icon-position == right
+            &:after
+                @extend %circle-icon-border
+                @extend %circle-icon-fontawesome
+        @if $progress-style-icon-position == top
+            padding: 14px 0 7px
+            &:before
+                top: -5px
+        @else if $progress-style-icon-position == bottom
+            padding: 7px 0 14px
+            &:after
+                top: 5px
+        @else if $progress-style-icon-position == right
+            &:after
+                margin-left: 5px
+        @else
+            padding: 10px 0 14px
+            &:before
+                margin-right: 5px
+        @extend %icons-fontawesome

@@ -1,0 +1,29 @@
+$body-font-size-base: 16px !default
+
+@function strip-units($number)
+    @return $number / ($number * 0 + 1)
+
+@function compute-pixel-size($rem-size)
+    @return round(strip-units($rem-size * $body-font-size-base) * 1px)
+
+@mixin rem-font-size($rem-size, $prop-name: font-size)
+    #{$prop-name}: compute-pixel-size($rem-size)
+    #{$prop-name}: $rem-size
+
+//  Convert font-size from px to rem with px fallback
+// 
+//  @param $size - the value in pixel you want to convert
+//  
+//  example:
+//     .foo 
+//         @include font-size(12px)
+
+// Function for converting a px based font-size to rem.
+@function calculate-rem($size)
+    $remSize: $size / $body-font-size-base //Default font size on html element is 100%, equivalent to 16px;
+    @return #{$remSize}rem
+
+// Mixin that will include the fall back px declaration as well as the calculated rem value.
+@mixin font-size($size)
+    font-size: $size
+    font-size: calculate-rem($size)

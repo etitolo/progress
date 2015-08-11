@@ -1,0 +1,20 @@
+@import "compass/reset"
+
+@import "base/vars"
+@import "base/functions"
+@import "base/material-shadows"
+@import "base/rem-calc"
+@import "base/breakpoints"
+@import "/Users/etitolo/projects/github/progressing.github.io/gramsci/external/font-awesome/scss/font-awesome"
+
+@import "skin-default"
+@import "skin-circle-icon-fontawesome"
+@import "skin-circle-icon-ordinal"
+@import "skin-simple-icon-fontawesome"
+@import "skin-simple-ordinal"
+@import "skin-border-arrows"
+@import "skin-bullet-on-keyline"
+
+
+// We need to redefine this variable if the optional brand configuration is used.
+$border-arrows-grouping: ($progress-style == border-arrows) or ($progress-style == border-arrows-icons) or ($progress-style == border-arrows-ordinal)

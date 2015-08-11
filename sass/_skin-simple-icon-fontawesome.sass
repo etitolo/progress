@@ -1,0 +1,31 @@
+@if $progress-style == simple-icon-fontawesome
+    $progress-style-vertical-keyline: true
+    .checkout-progress-bar-step
+        padding: 6px 0 10px
+        @if $progress-style-vertical-keyline == true
+            +progress-vertical-keyline
+        &:before, &:after
+            @extend .fa
+            +font-size($progress-icon-size)
+        @if $progress-style-icon-position == top or $progress-style-icon-position == bottom
+            &:before
+                position: absolute
+                right: 44% 
+                @extend %simple-icon-fontawesome
+        @if $progress-style-icon-position == top
+            padding: 34px 0 7px
+            &:before
+                top: 5px
+        @else if $progress-style-icon-position == bottom
+            padding: 7px 0 34px
+            &:before
+                top: 26px
+        @else if $progress-style-icon-position == right
+            &:after
+                margin-left: 5px
+                @extend %simple-icon-fontawesome
+        @else
+            &:before
+                margin-right: 5px
+                @extend %simple-icon-fontawesome
+        @extend %icons-fontawesome
