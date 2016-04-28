@@ -1,1 +1,1 @@
-This is the temporary repo for Progressing, a configurable and skinnable progress bar. In the meantime, have a look at the code. The idea behind this was that I needed to create a common set of Sass and HTML that could be configured for multiple instances of the propress bar. 
+This is a configurable and skinnable progress bar. The idea behind this was that I needed to create a common set of Sass and HTML that could be configured for multiple instances of the same progress bar. It contains no images and is pure HTML and CSS.
